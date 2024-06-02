@@ -1,6 +1,6 @@
 import {Router, Request, Response} from "express";
 import {Template} from "../db/model";
-import {sendMail} from "../mail/core";
+import {sendMail} from "./mail/core";
 
 const router = Router();
 

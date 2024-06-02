@@ -1,4 +1,4 @@
-import {SERVER_PORT} from "./config";
+import {SERVER_HOST, SERVER_PORT} from "./config";
 // @ts-ignore
 import cookieParser from 'cookie-parser'
 // @ts-ignore
@@ -12,6 +12,6 @@ app.use(cookieParser());
 app.use(router)
 export default () => {
   app.listen(SERVER_PORT, () => {
-    console.log(`Server is running on http://localhost:${SERVER_PORT}`);
+    console.log(`Server is running on ${SERVER_HOST}:${SERVER_PORT}`);
   });
 }
