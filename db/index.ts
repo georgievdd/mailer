@@ -7,6 +7,7 @@ const sequelize = new Sequelize({
   dialect: "postgres",
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
+  host: 'db',
   models: [Template],
 });
 
