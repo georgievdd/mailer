@@ -62,8 +62,8 @@ router.post('/set_template', async (req: Request, res: Response) => {
 })
 router.get('/template', async (req: Request, res: Response) => {
   try {
-    res.status(200).send((await Template.findAll()).map(({name, script}) => ({
-      name, script
+    res.status(200).send((await Template.findAll()).map(({name}) => ({
+      name
     })))
   } catch (e) {
     res.status(500).json({ error: e });
