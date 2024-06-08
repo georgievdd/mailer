@@ -1,4 +1,4 @@
-import {SERVER_HOST, SERVER_PORT} from "./config";
+import {SERVER_HOST, SERVER_PORT, USE_SECRET} from "./config";
 // @ts-ignore
 import cookieParser from 'cookie-parser'
 // @ts-ignore
@@ -8,7 +8,9 @@ import router from "./router";
 const app = express()
 app.use(express.json());
 app.use(cookieParser());
-// app.use(checkKey)
+if (USE_SECRET) {
+  app.use(checkKey)
+}
 app.use(router)
 export default () => {
   app.listen(SERVER_PORT, () => {
