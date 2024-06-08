@@ -16,7 +16,9 @@ services:
       - app-network
 
   server:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     depends_on:
       - db
     env_file:
