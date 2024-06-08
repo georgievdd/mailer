@@ -1,6 +1,7 @@
-import { Sequelize } from "sequelize-typescript";
+import {Column, DataType, Sequelize} from "sequelize-typescript";
 import {DB_HOST, POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER} from "./config";
-import {Template} from "./model";
+import {Sender, Template} from "./model";
+import {DEFAULT_SENDER} from "../server/config";
 
 const sequelize = new Sequelize({
   database: POSTGRES_DB,
@@ -8,7 +9,16 @@ const sequelize = new Sequelize({
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
   host: DB_HOST,
-  models: [Template],
+  models: [Template, Sender],
 });
 
-export default () => sequelize.sync();
+export default async () => {
+  await sequelize.sync()
+  if (!(await Sender.findOne({where: {email: DEFAULT_SENDER}}))) {
+    await Sender.create({
+      smtp_host: 'smtp.yandex.ru',
+      email: 'georgiewden@yandex.ru',
+      password: 'fyecjegstfkpuxpy',
+    })
+  }
+};
