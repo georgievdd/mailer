@@ -23,8 +23,8 @@ router.post('/send', async (req: Request, res: Response) => {
     if (!template) {
       return res.status(500).json({ error: {message: "Not found template"} });
     }
-    // combine variables and temp.script
-    const html = eval(template.script)
+    const html = eval(template.script)(variables)
+    console.log(html)
     sendMail({
       to,
       title,
@@ -77,7 +77,7 @@ router.get('/template/:name', async (req: Request, res: Response) => {
     if (!template) {
       throw new Error("Not found")
     }
-    const text = eval(template.script)
+    const text = eval(template.script)()
     res.status(200).send(text)
   } catch (e) {
     res.status(500).json({ error: e });
