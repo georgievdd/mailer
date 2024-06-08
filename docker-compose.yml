@@ -31,6 +31,7 @@ services:
     image: nginx:latest
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./.nginx:/etc/nginx
       - /etc/letsencrypt:/etc/letsencrypt
