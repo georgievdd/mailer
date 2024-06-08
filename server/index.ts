@@ -14,6 +14,6 @@ if (USE_SECRET) {
 app.use(router)
 export default () => {
   app.listen(SERVER_PORT, () => {
-    console.log(`Server is running on ${SERVER_HOST}:${SERVER_PORT}`);
+    console.log(`Server is running on ${SERVER_HOST}`);
   });
 }
