@@ -32,7 +32,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./.nginx/conf.d:/etc/nginx/conf.d
+      - ./.nginx:/etc/nginx
       - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
       - server
