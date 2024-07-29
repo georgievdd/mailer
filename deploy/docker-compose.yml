@@ -16,7 +16,7 @@ services:
 
   server:
     build:
-      context: .
+      context: ../server
       dockerfile: Dockerfile
     depends_on:
       - db
