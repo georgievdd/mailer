@@ -1,7 +1,5 @@
 import {SERVER_HOST, SERVER_PORT, USE_SECRET} from "./config";
-// @ts-ignore
 import cookieParser from 'cookie-parser'
-// @ts-ignore
 import express from 'express'
 import checkKey from "./middleware/checkKey";
 import router from "./router";

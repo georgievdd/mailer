@@ -6,13 +6,13 @@ export class Template extends Model {
     type: DataType.STRING,
     allowNull: false,
   })
-  name!: string
+  name!: string;
 
   @Column({
     type: DataType.TEXT,
     allowNull: false,
   })
-  script!: string
+  script!: string;
 }
 
 @Table
@@ -21,18 +21,18 @@ export class Sender extends Model {
     type: DataType.STRING,
     allowNull: false,
   })
-  smtp_host!: string
+  smtp_host!: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
     unique: true,
   })
-  email!: string
+  email!: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  password!: string
+  password!: string;
 }

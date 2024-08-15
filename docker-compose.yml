@@ -16,7 +16,7 @@ services:
 
   server:
     build:
-      context: ../server
+      context: .
       dockerfile: Dockerfile
     depends_on:
       - db
@@ -24,19 +24,6 @@ services:
       - .env
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
-    networks:
-      - app-network
-
-  nginx:
-    image: nginx:latest
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./.nginx:/etc/nginx
-      - /etc/letsencrypt:/etc/letsencrypt
-    depends_on:
-      - server
     networks:
       - app-network
 

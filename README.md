@@ -12,3 +12,7 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 git clone https://github.com/georgievdd/mailer.git
+
+cd mailer
+
+sudo docker compose up
