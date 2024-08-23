@@ -1,7 +1,6 @@
 import {Router, Request, Response} from "express";
 import {Sender, Template} from "../db/model";
 import {sendMail} from "./mail/core";
-import {DEFAULT_SENDER} from "./config";
 
 const router = Router();
 
@@ -24,14 +23,13 @@ router.post('/send', async (req: Request, res: Response) => {
   } = req.body as SendRequest
   try {
     console.log(senderEmail)
-    const email = senderEmail || DEFAULT_SENDER
     const template = await Template.findOne({where: {name: templateName}})
     if (!template) {
       return res.status(404).json({ error: {message: "Not found template"} });
     }
-    const sender = await Sender.findOne({where: {email: email}}) as Sender
+    const sender = await Sender.findOne({where: {email: senderEmail}}) as Sender
     if (!sender) {
-      return res.status(404).json({ error: {message: `Not found sender with email ${email}`} });
+      return res.status(404).json({ error: {message: `Not found sender with email ${senderEmail}`} });
     }
     const html = eval(template.script)(variables)
     await sendMail({
