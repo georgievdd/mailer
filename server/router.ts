@@ -23,11 +23,16 @@ router.post('/send', async (req: Request, res: Response) => {
     senderEmail
   } = req.body as SendRequest
   try {
+    console.log(senderEmail)
+    const email = senderEmail || DEFAULT_SENDER
     const template = await Template.findOne({where: {name: templateName}})
     if (!template) {
-      return res.status(500).json({ error: {message: "Not found template"} });
+      return res.status(404).json({ error: {message: "Not found template"} });
     }
-    const sender = await Sender.findOne({where: {email: senderEmail || DEFAULT_SENDER}}) as Sender
+    const sender = await Sender.findOne({where: {email: email}}) as Sender
+    if (!sender) {
+      return res.status(404).json({ error: {message: `Not found sender with email ${email}`} });
+    }
     const html = eval(template.script)(variables)
     await sendMail({
       to,
