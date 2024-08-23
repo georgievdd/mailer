@@ -1,3 +1,3 @@
 import server from './server'
-import database from './db'
-database().then(server)
+import db from './db'
+db().then(server)

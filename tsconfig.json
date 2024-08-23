@@ -4,11 +4,14 @@
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
+    "outDir": "./dist",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["es6", "dom"],
     "typeRoots": ["./node_modules/@types", "./types"],
-    "emitDecoratorMetadata": true,  // Enable this
-    "experimentalDecorators": true  // Enable this
-  }
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+  },
+  "include": ["*.ts"],
+  "exclude": ["node_modules"]
 }

@@ -1,4 +1,4 @@
-import {SERVER_HOST, SERVER_PORT, USE_SECRET} from "./config";
+import {SERVER_PORT, USE_SECRET} from "./config";
 import cookieParser from 'cookie-parser'
 import express from 'express'
 import checkKey from "./middleware/checkKey";
@@ -13,7 +13,5 @@ if (USE_SECRET) {
 }
 app.use(router)
 export default () => {
-  app.listen(SERVER_PORT, () => {
-    console.log(`Server is running on ${SERVER_HOST}`);
-  });
+  app.listen(SERVER_PORT, () => console.log(`started on port ${SERVER_PORT}`));
 }

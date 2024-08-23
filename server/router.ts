@@ -2,16 +2,16 @@ import {Router, Request, Response} from "express";
 import {Sender, Template} from "../db/model";
 import {sendMail} from "./mail/core";
 import {DEFAULT_SENDER} from "./config";
-import {where} from "sequelize";
 
 const router = Router();
 
 interface SendRequest {
-  variables: string // объект с необходимыми переменными; достается через eval
+  variables: Record<string, string>
   to: string
   templateName: string
   title: string
   senderEmail: string
+  context: Record<string, any>
 }
 
 router.post('/send', async (req: Request, res: Response) => {
@@ -29,7 +29,7 @@ router.post('/send', async (req: Request, res: Response) => {
     }
     const sender = await Sender.findOne({where: {email: senderEmail || DEFAULT_SENDER}}) as Sender
     const html = eval(template.script)(variables)
-    sendMail({
+    await sendMail({
       to,
       title,
       html,
@@ -38,7 +38,7 @@ router.post('/send', async (req: Request, res: Response) => {
     res.status(200).send("OK")
   } catch (e) {
     console.log(e)
-    res.status(500).json({ error: e });
+    res.status(500).json({ error: e })
   }
 })
 
